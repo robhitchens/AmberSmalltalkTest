@@ -26,7 +26,9 @@ doConsoleLog
 doInspectStatus
 	(self getApi: '/status')
 		then: {#json. #inspect}
-		catch: [ :err | Terminal alert: err ]
+		catch: [ :err | 
+			console error: err.
+			Terminal alert: err ]
 !
 
 doJQueryAppend
@@ -41,11 +43,12 @@ doSilkTAG
 
 endpoint
 	"Return something like 'https://<char mess>.execute-api.eu-central-1.amazonaws.com/default'"
-	^ self error: 'Not yet implemented'
+	"^ self error: 'Not yet implemented'"
+	^ 'http:localhost:4000'
 !
 
 getApi: path
-	^ Platform fetch: self endpoint, path
+	 ^ Platform fetch: self endpoint, path
 !
 
 showMessage: message
@@ -55,12 +58,17 @@ showMessage: message
 !Playing methodsFor: 'starting'!
 
 augmentPage
+	| bodyRef |
+	bodyRef := ('body' asDomNode asJQuery).
     '#lambda-status' asSilk on: #click bind: [ self doInspectStatus ].
 	'#console-log' asSilk on: #click bind: [ self doConsoleLog ].
 	'#timeout-alert' asSilk on: #click bind: [ self alert: 'REMINDER!!' after: 5000 ].
 	'#amber-with' asBrush onClick: [ self doAmberWith ].
 	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
-	'#jquery-append' asJQuery click: [ self doJQueryAppend ]
+	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
+	bodyRef html: ('<p>Some text appended from Amber</p>').
+	('body' asDomNode) asJQuery append: '<button id="showMessage">Hello from the UI</button>'.
+	'#showMessage' asJQuery click: [ self showMessage: 'Hello from the UI' ]
 ! !
 
 !Playing class methodsFor: 'starting'!

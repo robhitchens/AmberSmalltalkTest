@@ -49,16 +49,26 @@ selector: "augmentPage",
 protocol: "starting",
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a    '#lambda-status' asSilk on: #click bind: [ self doInspectStatus ].\x0a\x09'#console-log' asSilk on: #click bind: [ self doConsoleLog ].\x0a\x09'#timeout-alert' asSilk on: #click bind: [ self alert: 'REMINDER!' after: 5000 ].\x0a\x09'#amber-with' asBrush onClick: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ]",
+source: "augmentPage\x0a\x09| bodyRef |\x0a\x09bodyRef := ('body' asDomNode asJQuery).\x0a    '#lambda-status' asSilk on: #click bind: [ self doInspectStatus ].\x0a\x09'#console-log' asSilk on: #click bind: [ self doConsoleLog ].\x0a\x09'#timeout-alert' asSilk on: #click bind: [ self alert: 'REMINDER!' after: 5000 ].\x0a\x09'#amber-with' asBrush onClick: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x0a\x09bodyRef html: ('<p>Some text appended from Amber</p>').\x0a\x09('body' asDomNode) asJQuery append: '<button id=\x22showMessage\x22>Hello from the UI</button>'.\x0a\x09'#showMessage' asJQuery click: [ self showMessage: 'Hello from the UI' ]",
 referencedClasses: [],
 //>>excludeEnd("ide");
 pragmas: [],
-messageSends: ["on:bind:", "asSilk", "doInspectStatus", "doConsoleLog", "alert:after:", "onClick:", "asBrush", "doAmberWith", "doSilkTAG", "click:", "asJQuery", "doJQueryAppend"]
+messageSends: ["asJQuery", "asDomNode", "on:bind:", "asSilk", "doInspectStatus", "doConsoleLog", "alert:after:", "onClick:", "asBrush", "doAmberWith", "doSilkTAG", "click:", "doJQueryAppend", "html:", "append:", "showMessage:"]
 }, function ($methodClass){ return function (){
 var self=this,$self=this;
+var bodyRef;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
+bodyRef=[$recv(["body"._asDomNode()
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+,$ctx1.sendIdx["asDomNode"]=1
+//>>excludeEnd("ctx");
+][0])._asJQuery()
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+,$ctx1.sendIdx["asJQuery"]=1
+//>>excludeEnd("ctx");
+][0];
 [$recv(["#lambda-status"._asSilk()
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 ,$ctx1.sendIdx["asSilk"]=1
@@ -128,7 +138,11 @@ return $self._doSilkTAG();
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,5)});
 //>>excludeEnd("ctx");
 }));
-$recv("#jquery-append"._asJQuery())._click_((function(){
+[$recv(["#jquery-append"._asJQuery()
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+,$ctx1.sendIdx["asJQuery"]=2
+//>>excludeEnd("ctx");
+][0])._click_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
@@ -136,10 +150,29 @@ return $self._doJQueryAppend();
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,6)});
 //>>excludeEnd("ctx");
+}))
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+,$ctx1.sendIdx["click:"]=1
+//>>excludeEnd("ctx");
+][0];
+$recv(bodyRef)._html_("<p>Some text appended from Amber</p>");
+$recv([$recv("body"._asDomNode())._asJQuery()
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+,$ctx1.sendIdx["asJQuery"]=3
+//>>excludeEnd("ctx");
+][0])._append_("<button id=\x22showMessage\x22>Hello from the UI</button>");
+$recv("#showMessage"._asJQuery())._click_((function(){
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx2) {
+//>>excludeEnd("ctx");
+return $self._showMessage_("Hello from the UI");
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx2) {$ctx2.fillBlock({},$ctx1,7)});
+//>>excludeEnd("ctx");
 }));
 return self;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"augmentPage",{})});
+}, function($ctx1) {$ctx1.fill(self,"augmentPage",{bodyRef:bodyRef})});
 //>>excludeEnd("ctx");
 }; }),
 $globals.Playing);
@@ -229,11 +262,11 @@ selector: "doInspectStatus",
 protocol: "action",
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "doInspectStatus\x0a\x09(self getApi: '/status')\x0a\x09\x09then: {#json. #inspect}\x0a\x09\x09catch: [ :err | Terminal alert: err ]",
+source: "doInspectStatus\x0a\x09(self getApi: '/status')\x0a\x09\x09then: {#json. #inspect}\x0a\x09\x09catch: [ :err | \x0a\x09\x09\x09console error: err.\x0a\x09\x09\x09Terminal alert: err ]",
 referencedClasses: ["Terminal"],
 //>>excludeEnd("ide");
 pragmas: [],
-messageSends: ["then:catch:", "getApi:", "alert:"]
+messageSends: ["then:catch:", "getApi:", "error:", "alert:"]
 }, function ($methodClass){ return function (){
 var self=this,$self=this;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
@@ -243,6 +276,7 @@ $recv($self._getApi_("/status"))._then_catch_(["json","inspect"],(function(err){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
 //>>excludeEnd("ctx");
+$recv(console)._error_(err);
 return $recv($globals.Terminal)._alert_(err);
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 }, function($ctx2) {$ctx2.fillBlock({err:err},$ctx1,1)});
@@ -309,20 +343,15 @@ selector: "endpoint",
 protocol: "backend",
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "endpoint\x0a\x09\x22Return something like 'https://<char mess>.execute-api.eu-central-1.amazonaws.com/default'\x22\x0a\x09^ self error: 'Not yet implemented'",
+source: "endpoint\x0a\x09\x22Return something like 'https://<char mess>.execute-api.eu-central-1.amazonaws.com/default'\x22\x0a\x09\x22^ self error: 'Not yet implemented'\x22\x0a\x09^ 'http:localhost:4000'",
 referencedClasses: [],
 //>>excludeEnd("ide");
 pragmas: [],
-messageSends: ["error:"]
+messageSends: []
 }, function ($methodClass){ return function (){
 var self=this,$self=this;
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-return $core.withContext(function($ctx1) {
-//>>excludeEnd("ctx");
-return $self._error_("Not yet implemented");
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-}, function($ctx1) {$ctx1.fill(self,"endpoint",{})});
-//>>excludeEnd("ctx");
+return "http:localhost:4000";
+
 }; }),
 $globals.Playing);
 
@@ -332,7 +361,7 @@ selector: "getApi:",
 protocol: "backend",
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: ["path"],
-source: "getApi: path\x0a\x09^ Platform fetch: self endpoint, path",
+source: "getApi: path\x0a\x09 ^ Platform fetch: self endpoint, path",
 referencedClasses: ["Platform"],
 //>>excludeEnd("ide");
 pragmas: [],
