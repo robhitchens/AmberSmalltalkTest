@@ -59,15 +59,15 @@ showMessage: message
 
 augmentPage
 	| bodyRef |
-	bodyRef := ('body' asDomNode asJQuery).
+	bodyRef := ('#todo' asJQuery).
     '#lambda-status' asSilk on: #click bind: [ self doInspectStatus ].
 	'#console-log' asSilk on: #click bind: [ self doConsoleLog ].
 	'#timeout-alert' asSilk on: #click bind: [ self alert: 'REMINDER!!' after: 5000 ].
 	'#amber-with' asBrush onClick: [ self doAmberWith ].
 	'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].
 	'#jquery-append' asJQuery click: [ self doJQueryAppend ].
-	bodyRef html: ('<p>Some text appended from Amber</p>').
-	('body' asDomNode) asJQuery append: '<button id="showMessage">Hello from the UI</button>'.
+	"bodyRef html: ((bodyRef html asString),'<p>Some text appended from Amber</p>')."
+	bodyRef append: '<button id="showMessage">Hello from the UI</button>'.
 	'#showMessage' asJQuery click: [ self showMessage: 'Hello from the UI' ]
 ! !
 

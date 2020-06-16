@@ -49,22 +49,18 @@ selector: "augmentPage",
 protocol: "starting",
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09| bodyRef |\x0a\x09bodyRef := ('body' asDomNode asJQuery).\x0a    '#lambda-status' asSilk on: #click bind: [ self doInspectStatus ].\x0a\x09'#console-log' asSilk on: #click bind: [ self doConsoleLog ].\x0a\x09'#timeout-alert' asSilk on: #click bind: [ self alert: 'REMINDER!' after: 5000 ].\x0a\x09'#amber-with' asBrush onClick: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x0a\x09bodyRef html: ('<p>Some text appended from Amber</p>').\x0a\x09('body' asDomNode) asJQuery append: '<button id=\x22showMessage\x22>Hello from the UI</button>'.\x0a\x09'#showMessage' asJQuery click: [ self showMessage: 'Hello from the UI' ]",
+source: "augmentPage\x0a\x09| bodyRef |\x0a\x09bodyRef := ('#todo' asJQuery).\x0a    '#lambda-status' asSilk on: #click bind: [ self doInspectStatus ].\x0a\x09'#console-log' asSilk on: #click bind: [ self doConsoleLog ].\x0a\x09'#timeout-alert' asSilk on: #click bind: [ self alert: 'REMINDER!' after: 5000 ].\x0a\x09'#amber-with' asBrush onClick: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x0a\x09\x22bodyRef html: ((bodyRef html asString),'<p>Some text appended from Amber</p>').\x22\x0a\x09bodyRef append: '<button id=\x22showMessage\x22>Hello from the UI</button>'.\x0a\x09'#showMessage' asJQuery click: [ self showMessage: 'Hello from the UI' ]",
 referencedClasses: [],
 //>>excludeEnd("ide");
 pragmas: [],
-messageSends: ["asJQuery", "asDomNode", "on:bind:", "asSilk", "doInspectStatus", "doConsoleLog", "alert:after:", "onClick:", "asBrush", "doAmberWith", "doSilkTAG", "click:", "doJQueryAppend", "html:", "append:", "showMessage:"]
+messageSends: ["asJQuery", "on:bind:", "asSilk", "doInspectStatus", "doConsoleLog", "alert:after:", "onClick:", "asBrush", "doAmberWith", "doSilkTAG", "click:", "doJQueryAppend", "append:", "showMessage:"]
 }, function ($methodClass){ return function (){
 var self=this,$self=this;
 var bodyRef;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-bodyRef=[$recv(["body"._asDomNode()
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-,$ctx1.sendIdx["asDomNode"]=1
-//>>excludeEnd("ctx");
-][0])._asJQuery()
+bodyRef=["#todo"._asJQuery()
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 ,$ctx1.sendIdx["asJQuery"]=1
 //>>excludeEnd("ctx");
@@ -155,12 +151,7 @@ return $self._doJQueryAppend();
 ,$ctx1.sendIdx["click:"]=1
 //>>excludeEnd("ctx");
 ][0];
-$recv(bodyRef)._html_("<p>Some text appended from Amber</p>");
-$recv([$recv("body"._asDomNode())._asJQuery()
-//>>excludeStart("ctx", pragmas.excludeDebugContexts);
-,$ctx1.sendIdx["asJQuery"]=3
-//>>excludeEnd("ctx");
-][0])._append_("<button id=\x22showMessage\x22>Hello from the UI</button>");
+$recv(bodyRef)._append_("<button id=\x22showMessage\x22>Hello from the UI</button>");
 $recv("#showMessage"._asJQuery())._click_((function(){
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx2) {
