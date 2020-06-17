@@ -59,7 +59,7 @@ showMessage: message
 
 augmentPage
 	| bodyRef |
-	bodyRef := ('#todo' asJQuery).
+	bodyRef := ('#appBody' asJQuery).
     '#lambda-status' asSilk on: #click bind: [ self doInspectStatus ].
 	'#console-log' asSilk on: #click bind: [ self doConsoleLog ].
 	'#timeout-alert' asSilk on: #click bind: [ self alert: 'REMINDER!!' after: 5000 ].
@@ -75,5 +75,31 @@ augmentPage
 
 start
 	self new augmentPage
+! !
+
+Object subclass: #PlayingRenderer
+	slots: {}
+	package: 'Playing'!
+!PlayingRenderer commentStamp!
+This class is just a place to mess around with and figure out the Amber smalltalk environment and Helios IDE and try to understand how it works!
+
+Object subclass: #PlayingService
+	slots: {#something}
+	package: 'Playing'!
+!PlayingService commentStamp!
+This class is just a place to mess around with and figure out the Amber smalltalk environment and Helios IDE and try to understand how it works!
+
+!PlayingService methodsFor: 'accessing'!
+
+fetchMovieByTitle: aString
+	Transcript show: aString; cr.
+!
+
+something
+	^ something
+!
+
+something: anObject
+	something := anObject
 ! !
 

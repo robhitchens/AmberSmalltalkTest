@@ -49,7 +49,7 @@ selector: "augmentPage",
 protocol: "starting",
 //>>excludeStart("ide", pragmas.excludeIdeData);
 args: [],
-source: "augmentPage\x0a\x09| bodyRef |\x0a\x09bodyRef := ('#todo' asJQuery).\x0a    '#lambda-status' asSilk on: #click bind: [ self doInspectStatus ].\x0a\x09'#console-log' asSilk on: #click bind: [ self doConsoleLog ].\x0a\x09'#timeout-alert' asSilk on: #click bind: [ self alert: 'REMINDER!' after: 5000 ].\x0a\x09'#amber-with' asBrush onClick: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x0a\x09\x22bodyRef html: ((bodyRef html asString),'<p>Some text appended from Amber</p>').\x22\x0a\x09bodyRef append: '<button id=\x22showMessage\x22>Hello from the UI</button>'.\x0a\x09'#showMessage' asJQuery click: [ self showMessage: 'Hello from the UI' ]",
+source: "augmentPage\x0a\x09| bodyRef |\x0a\x09bodyRef := ('#appBody' asJQuery).\x0a    '#lambda-status' asSilk on: #click bind: [ self doInspectStatus ].\x0a\x09'#console-log' asSilk on: #click bind: [ self doConsoleLog ].\x0a\x09'#timeout-alert' asSilk on: #click bind: [ self alert: 'REMINDER!' after: 5000 ].\x0a\x09'#amber-with' asBrush onClick: [ self doAmberWith ].\x0a\x09'#silk-tag' asSilk on: #click bind: [ self doSilkTAG ].\x0a\x09'#jquery-append' asJQuery click: [ self doJQueryAppend ].\x0a\x09\x22bodyRef html: ((bodyRef html asString),'<p>Some text appended from Amber</p>').\x22\x0a\x09bodyRef append: '<button id=\x22showMessage\x22>Hello from the UI</button>'.\x0a\x09'#showMessage' asJQuery click: [ self showMessage: 'Hello from the UI' ]",
 referencedClasses: [],
 //>>excludeEnd("ide");
 pragmas: [],
@@ -60,7 +60,7 @@ var bodyRef;
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 return $core.withContext(function($ctx1) {
 //>>excludeEnd("ctx");
-bodyRef=["#todo"._asJQuery()
+bodyRef=["#appBody"._asJQuery()
 //>>excludeStart("ctx", pragmas.excludeDebugContexts);
 ,$ctx1.sendIdx["asJQuery"]=1
 //>>excludeEnd("ctx");
@@ -417,5 +417,82 @@ return self;
 //>>excludeEnd("ctx");
 }; }),
 $globals.Playing.a$cls);
+
+
+$core.addClass("PlayingRenderer", $globals.Object, "Playing");
+//>>excludeStart("ide", pragmas.excludeIdeData);
+$globals.PlayingRenderer.comment="This class is just a place to mess around with and figure out the Amber smalltalk environment and Helios IDE and try to understand how it works";
+//>>excludeEnd("ide");
+
+
+$core.addClass("PlayingService", $globals.Object, "Playing");
+$core.setSlots($globals.PlayingService, ["something"]);
+//>>excludeStart("ide", pragmas.excludeIdeData);
+$globals.PlayingService.comment="This class is just a place to mess around with and figure out the Amber smalltalk environment and Helios IDE and try to understand how it works";
+//>>excludeEnd("ide");
+$core.addMethod(
+$core.method({
+selector: "fetchMovieByTitle:",
+protocol: "accessing",
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["aString"],
+source: "fetchMovieByTitle: aString\x0a\x09Transcript show: aString; cr.",
+referencedClasses: ["Transcript"],
+//>>excludeEnd("ide");
+pragmas: [],
+messageSends: ["show:", "cr"]
+}, function ($methodClass){ return function (aString){
+var self=this,$self=this;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+return $core.withContext(function($ctx1) {
+//>>excludeEnd("ctx");
+var $1;
+$1=$globals.Transcript;
+$recv($1)._show_(aString);
+$recv($1)._cr();
+return self;
+//>>excludeStart("ctx", pragmas.excludeDebugContexts);
+}, function($ctx1) {$ctx1.fill(self,"fetchMovieByTitle:",{aString:aString})});
+//>>excludeEnd("ctx");
+}; }),
+$globals.PlayingService);
+
+$core.addMethod(
+$core.method({
+selector: "something",
+protocol: "accessing",
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: [],
+source: "something\x0a\x09^ something",
+referencedClasses: [],
+//>>excludeEnd("ide");
+pragmas: [],
+messageSends: []
+}, function ($methodClass){ return function (){
+var self=this,$self=this;
+return $self.something;
+
+}; }),
+$globals.PlayingService);
+
+$core.addMethod(
+$core.method({
+selector: "something:",
+protocol: "accessing",
+//>>excludeStart("ide", pragmas.excludeIdeData);
+args: ["anObject"],
+source: "something: anObject\x0a\x09something := anObject",
+referencedClasses: [],
+//>>excludeEnd("ide");
+pragmas: [],
+messageSends: []
+}, function ($methodClass){ return function (anObject){
+var self=this,$self=this;
+$self.something=anObject;
+return self;
+
+}; }),
+$globals.PlayingService);
+
 
 });

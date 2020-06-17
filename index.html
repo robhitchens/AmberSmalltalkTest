@@ -8,8 +8,9 @@
     <script type='text/javascript' src='the.js'></script>
 </head>
 
-<body id="todo">
+<body>
 <!-- EXAMPLE APP START -->
+<app id="appBody">
 <p>This is a sample app. It contains some
     <a href="parts.html">batteries included</a>
     and should be
@@ -22,6 +23,7 @@
 <button id="timeout-alert">Remind me in five seconds</button>
 <button id="lambda-status">Inspect status of backend</button>
 <ol id="output-list"></ol>
+</app>
 <!-- EXAMPLE APP END -->
 <script type='text/javascript'>
     var global = typeof global === "undefined" ? window : global || window;
